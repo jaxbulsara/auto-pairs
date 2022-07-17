@@ -401,20 +401,7 @@ func! AutoPairsReturn()
         let cmd = "zz"
       end
 
-      " If equalprg has been set, then avoid call =
-      " https://github.com/jiangmiao/auto-pairs/issues/24
-      if &equalprg != ''
-        return "\<ESC>".cmd."O"
-      endif
-
-      " conflict with javascript and coffee
-      " javascript   need   indent new line
-      " coffeescript forbid indent new line
-      if &filetype == 'coffeescript' || &filetype == 'coffee'
-        return "\<ESC>".cmd."k==o"
-      else
-        return "\<ESC>".cmd."=ko"
-      endif
+      return "\<ESC>".cmd."O"
     end
   endfor
   return ''
