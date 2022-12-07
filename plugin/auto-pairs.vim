@@ -23,7 +23,6 @@ func! AutoPairsDefaultPairs()
   end
   let r = copy(g:AutoPairs)
   let allPairs = {
-        \ 'vim': {'\v^\s*\zs"': ''},
         \ 'rust': {'\w\zs<': '>', '&\zs''': ''},
         \ 'php': {'<?': '?>//k]', '<?php': '?>//k]'}
         \ }
@@ -392,6 +391,10 @@ func! AutoPairsReturn()
   for [open, close, opt] in b:AutoPairsList
     if close == ''
       continue
+    end
+
+    if open == '(' && &filetype == "python" || &filetype == "rust"
+        continue
     end
 
     if before =~ '\V'.open.'\v\s*$' && afterline =~ '^\s*\V'.close
