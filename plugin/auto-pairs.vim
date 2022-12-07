@@ -393,7 +393,13 @@ func! AutoPairsReturn()
       continue
     end
 
-    if open == '(' && &filetype == "python" || &filetype == "rust"
+    " Do not expand on return in python
+    if &filetype == "python"
+        continue
+    end
+
+    " Do not expand on return in parens in rust
+    if open == '(' && &filetype == "rust"
         continue
     end
 
